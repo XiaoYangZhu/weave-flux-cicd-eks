@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: weave-flux-cicd-eks
-        image: 993602015689.dkr.ecr.ap-northeast-1.amazonaws.com/weave-flux-cicd-eks-image-repo:a00433c2
+        image: 993602015689.dkr.ecr.ap-northeast-1.amazonaws.com/weave-flux-cicd-eks-image-repo:3c1c9c38
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
