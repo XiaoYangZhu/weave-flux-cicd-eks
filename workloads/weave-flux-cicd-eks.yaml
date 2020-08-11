@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weave-flux-cicd-eks
+  namespace: weave-flux-cicd-eks
+  labels:
+    app: weave-flux-cicd-eks
+  annotations:
+    # Container Image Automated Updates
+    flux.weave.works/automated: "true"
+    # do not apply this manifest on the cluster
+    #flux.weave.works/ignore: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weave-flux-cicd-eks
+  template:
+    metadata:
+      labels:
+        app: weave-flux-cicd-eks
+    spec:
+      containers:
+      - name: weave-flux-cicd-eks
+        image: 993602015689.dkr.ecr.ap-northeast-1.amazonaws.com/weave-flux-cicd-eks-image-repo:3c1c9c38
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
